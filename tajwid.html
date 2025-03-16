@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TajwidApp - Belajar Tajwid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .menu a {
+            text-decoration: none;
+            background: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .tajwid-list {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .tajwid-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .tajwid-list li {
+            background: #eee;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .tajwid-list a {
+            text-decoration: none;
+            color: black;
+            display: block;
+        }
+        .tajwid-image {
+            width: 100px;
+            height: auto;
+            margin-top: 10px;
+        }
+        .audio-control {
+            margin-top: 10px;
+        }
+        .quiz {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .quiz button {
+            margin-top: 10px;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .quiz button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Selamat Datang di TajwidApp</h1>
+        <p>Belajar Tajwid dengan mudah dan menyenangkan!</p>
+        <div class="menu">
+            <a href="#">Daftar Tajwid</a>
+            <a href="#">Latihan Tajwid</a>
+        </div>
+        <div class="tajwid-list">
+            <h2>Daftar Hukum Tajwid</h2>
+            <ul>
+                <li>
+                    <a href="idgham.html">1. Idgham</a>
+                    <br>
+                    <img src="images/idgham.jpg" alt="Idgham" class="tajwid-image">
+                    <br>
+                    <audio class="audio-control" controls>
+                        <source src="audio/idgham.mp3" type="audio/mpeg">
+                        Browser Anda tidak mendukung elemen audio.
+                    </audio>
+                </li>
+                <li>
+                    <a href="ikhfa.html">1. Ikhfa</a>
+                    <br>
+                    <img src="images/ikhfa.jpg" alt="Ikhfa" class="tajwid-image">
+                    <br>
+                    <audio class="audio-control" controls>
+                        <source src="audio/ikhfa.mp3" type="audio/mpeg">
+                        Browser Anda tidak mendukung elemen audio.
+                    </audio>
+                </li>
+                <li>
+                    <a href="izhar.html">1. Izhar</a>
+                    <br>
+                    <img src="images/izhar.jpg" alt="Izhar" class="tajwid-image">
+                    <br>
+                    <audio class="audio-control" controls>
+                        <source src="audio/izhar.mp3" type="audio/mpeg">
+                        Browser Anda tidak mendukung elemen audio.
+                    </audio>
+                </li>
+                <li>
+                    <a href="iqlab.html">2. Iqlab</a>
+                    <br>
+                    <img src="images/iqlab.jpg" alt="Iqlab" class="tajwid-image">
+                    <br>
+                    <audio class="audio-control" controls>
+                        <source src="audio/iqlab.mp3" type="audio/mpeg">
+                        Browser Anda tidak mendukung elemen audio.
+                    </audio>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="quiz">
+            <h2>Latihan Tajwid</h2>
+            <div id="quiz-container"></div>
+            <p id="quiz-result"></p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "Apa hukum tajwid pada kata 'مَنْ يَعْمَلْ'?","correct": "Idgham", options: ["Idgham", "Iqlab", "Ikhfa"] },
+            { question: "Apa hukum tajwid pada kata 'أَنبَأَهُم'?","correct": "Iqlab", options: ["Ikhfa", "Idgham", "Iqlab"] },
+            { question: "Apa hukum tajwid pada kata 'يَنكُثُونَ'?","correct": "Ikhfa", options: ["Idgham", "Ikhfa", "Iqlab"] },
+            { question: "Apa hukum tajwid pada kata 'يُنْصَرُوْنَ'?","correct": "Ikhfa", options: ["Idgham", "Ikhfa", "Iqlab"] },
+            { question: "Apa hukum tajwid pada kata 'مِنْ بَعْدِ'?","correct": "Idgham", options: ["Idgham", "Ikhfa", "Iqlab"] },
+            { question: "Apa hukum tajwid pada kata 'يُنبِئُكُمْ'?","correct": "Iqlab", options: ["Iqlab", "Ikhfa", "Idgham"] }
+        ];
+
+        function loadQuiz() {
+            const quizContainer = document.getElementById("quiz-container");
+            quizContainer.innerHTML = "";
+            quizData.forEach((q) => {
+                const questionElem = document.createElement("p");
+                questionElem.innerText = q.question;
+                quizContainer.appendChild(questionElem);
+                
+                q.options.forEach(option => {
+                    const button = document.createElement("button");
+                    button.innerText = option;
+                    button.onclick = () => checkAnswer(option, q.correct);
+                    quizContainer.appendChild(button);
+                });
+            });
+        }
+
+        function checkAnswer(selected, correct) {
+            const result = document.getElementById("quiz-result");
+            if (selected === correct) {
+                result.innerHTML = "✅ Jawaban Benar!";
+                result.style.color = "green";
+            } else {
+                result.innerHTML = "❌ Jawaban Salah, coba lagi!";
+                result.style.color = "red";
+            }
+        }
+
+        loadQuiz();
+    </script>
+</body>
+</html>
